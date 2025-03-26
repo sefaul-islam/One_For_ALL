@@ -1,13 +1,16 @@
 package com.example.One_For_All.Controllers;
 
 
-import com.example.One_For_All.Repos.StudentRepository;
 import com.example.One_For_All.Services.*;
+import com.example.One_For_All.model.UserDTO;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/student")
-public class StudentController {
+public class UserController {
 
     private final GetService getService;
 
@@ -19,23 +22,22 @@ public class StudentController {
 
     private final GetServiceById getServiceById;
 
-    public StudentController(GetService getService, UpdateService updateService, PostService postService, DeleteService deleteService, GetServiceById getServiceById) {
+
+    public UserController(GetService getService, UpdateService updateService, PostService postService, DeleteService deleteService, GetServiceById getServiceById) {
         this.getService = getService;
         this.updateService = updateService;
         this.postService = postService;
         this.deleteService = deleteService;
         this.getServiceById = getServiceById;
     }
+       @GetMapping("/getuserinfo")
+          public ResponseEntity<List<UserDTO>> getInfoController(){
 
-    private  StudentRepository studentRepository;
+           return getService.execute(null);
+       }
 
-    public StudentController(StudentRepository studentRepository) {
-        this.studentRepository = studentRepository;
-    }
-    //      @GetMapping("/getuserinfo")
-//
-//
-//      @PostMapping
+
+       @PostMapping
 //
 //
 //      @PutMapping
