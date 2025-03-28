@@ -1,10 +1,10 @@
-package com.example.One_For_All.Services;
+package com.example.One_For_All.Users.Services;
 
-import com.example.One_For_All.Entities.User;
-import com.example.One_For_All.Repos.UserRepository;
+import com.example.One_For_All.Users.Entities.User;
+import com.example.One_For_All.Users.Repos.UserRepository;
+import com.example.One_For_All.Users.model.UpdateUserCommand;
+import com.example.One_For_All.Users.model.UserDTO;
 import com.example.One_For_All.exception.UserNotFoundException;
-import com.example.One_For_All.model.UpdateUserCommand;
-import com.example.One_For_All.model.UserDTO;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 

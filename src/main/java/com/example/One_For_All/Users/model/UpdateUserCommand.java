@@ -1,6 +1,6 @@
-package com.example.One_For_All.model;
+package com.example.One_For_All.Users.model;
 
-import com.example.One_For_All.Entities.User;
+import com.example.One_For_All.Users.Entities.User;
 import lombok.Getter;
 
 @Getter

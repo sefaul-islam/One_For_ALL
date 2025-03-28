@@ -1,10 +1,10 @@
-package com.example.One_For_All.Controllers;
+package com.example.One_For_All.Users.controllers;
 
 
-import com.example.One_For_All.Entities.User;
-import com.example.One_For_All.Services.*;
-import com.example.One_For_All.model.UpdateUserCommand;
-import com.example.One_For_All.model.UserDTO;
+import com.example.One_For_All.Users.Entities.User;
+import com.example.One_For_All.Users.Services.*;
+import com.example.One_For_All.Users.model.UpdateUserCommand;
+import com.example.One_For_All.Users.model.UserDTO;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -58,6 +58,9 @@ public class UserController {
         }
 //
 //
-//      @GetMapping
+        @GetMapping("getinfobyid/{id}")
+        public ResponseEntity<UserDTO> getInfoById(@PathVariable Integer id){
+            return getServiceById.execute(id);
+        }
 
 }

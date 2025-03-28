@@ -1,6 +1,6 @@
-package com.example.One_For_All.Repos;
+package com.example.One_For_All.Users.Repos;
 
-import com.example.One_For_All.Entities.User;
+import com.example.One_For_All.Users.Entities.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

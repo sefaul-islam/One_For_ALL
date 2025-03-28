@@ -1,7 +1,7 @@
-package com.example.One_For_All.Services;
+package com.example.One_For_All.Users.Services;
 
-import com.example.One_For_All.Entities.User;
-import com.example.One_For_All.Repos.UserRepository;
+import com.example.One_For_All.Users.Entities.User;
+import com.example.One_For_All.Users.Repos.UserRepository;
 import com.example.One_For_All.exception.UserNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

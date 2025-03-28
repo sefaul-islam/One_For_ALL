@@ -1,4 +1,4 @@
-package com.example.One_For_All.Entities;
+package com.example.One_For_All.Users.Entities;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
