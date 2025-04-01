@@ -44,20 +44,20 @@ public class UserController {
 
                  return postService.execute(user);
        }
-//
-//
+
+
         @PutMapping("/updateuserinfo/{id}")
         public ResponseEntity<UserDTO> updateInfoController(@RequestBody User user , @PathVariable Integer id){
             return updateService.execute(new UpdateUserCommand(id,user));
         }
-//
-//
+
+
         @DeleteMapping("/deleteuserinfo/{id}")
         public ResponseEntity<Void> deleteInfoController(@PathVariable Integer id){
            return  deleteService.execute(id);
         }
-//
-//
+
+
         @GetMapping("getinfobyid/{id}")
         public ResponseEntity<UserDTO> getInfoById(@PathVariable Integer id){
             return getServiceById.execute(id);
