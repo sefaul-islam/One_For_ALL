@@ -25,4 +25,12 @@ public class User {
     @NotBlank(message = "email can't be blank")
     private String email;
 
+    @Column(name = "dept_id" , nullable = false)
+    @NotNull(message = "dept id can't be null")
+    private Integer dept_id;
+
+
+
+
+
 }
