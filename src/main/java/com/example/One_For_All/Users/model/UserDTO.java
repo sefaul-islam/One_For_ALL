@@ -1,6 +1,6 @@
 package com.example.One_For_All.Users.model;
 
-import com.example.One_For_All.Users.Entities.User;
+import com.example.One_For_All.Users.model.Entities.Users;
 import lombok.Data;
 
 @Data
@@ -9,9 +9,9 @@ public class UserDTO {
     private String name;
     private String email;
 
-    public UserDTO(User users) {
+    public UserDTO(Users users) {
         this.id = users.getId();
-        this.name = users.getName();
+        this.name = users.getUsername();
         this.email = users.getEmail();
     }
 }

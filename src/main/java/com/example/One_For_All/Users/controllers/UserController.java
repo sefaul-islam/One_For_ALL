@@ -1,7 +1,7 @@
 package com.example.One_For_All.Users.controllers;
 
 
-import com.example.One_For_All.Users.Entities.User;
+import com.example.One_For_All.Users.model.Entities.Users;
 import com.example.One_For_All.Users.Services.*;
 import com.example.One_For_All.Users.model.UpdateUserCommand;
 import com.example.One_For_All.Users.model.UserDTO;
@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/student")
 public class UserController {
 
     private final GetService getService;
@@ -40,14 +39,14 @@ public class UserController {
 
 
        @PostMapping("/postuserinfo")
-        public ResponseEntity<UserDTO> postInfoController(@RequestBody User user){
+        public ResponseEntity<UserDTO> postInfoController(@RequestBody Users user){
 
                  return postService.execute(user);
        }
 
 
         @PutMapping("/updateuserinfo/{id}")
-        public ResponseEntity<UserDTO> updateInfoController(@RequestBody User user , @PathVariable Integer id){
+        public ResponseEntity<UserDTO> updateInfoController(@RequestBody Users user , @PathVariable Integer id){
             return updateService.execute(new UpdateUserCommand(id,user));
         }
 

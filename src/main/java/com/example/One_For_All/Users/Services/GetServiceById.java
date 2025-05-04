@@ -1,6 +1,6 @@
 package com.example.One_For_All.Users.Services;
 
-import com.example.One_For_All.Users.Entities.User;
+import com.example.One_For_All.Users.model.Entities.Users;
 import com.example.One_For_All.Users.Repos.UserRepository;
 import com.example.One_For_All.Users.model.UserDTO;
 import com.example.One_For_All.exception.UserNotFoundException;
@@ -18,7 +18,7 @@ public class GetServiceById {
     }
 
     public ResponseEntity<UserDTO> execute (Integer id){
-        Optional<User> optionalUser= userRepository.findById(id);
+        Optional<Users> optionalUser= userRepository.findById(id);
         if(optionalUser.isPresent()){
             return ResponseEntity.ok(new UserDTO(optionalUser.get()));
         }

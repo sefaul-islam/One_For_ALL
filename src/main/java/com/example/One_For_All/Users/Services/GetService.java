@@ -1,6 +1,6 @@
 package com.example.One_For_All.Users.Services;
 
-import com.example.One_For_All.Users.Entities.User;
+import com.example.One_For_All.Users.model.Entities.Users;
 import com.example.One_For_All.Users.Repos.UserRepository;
 import com.example.One_For_All.Users.model.UserDTO;
 import org.springframework.http.HttpStatus;
@@ -18,7 +18,7 @@ public class GetService {
     }
 
     public ResponseEntity<List<UserDTO>> execute(Void input){
-        List<User> users= userRepository.findAll();
+        List<Users> users= userRepository.findAll();
         List<UserDTO> userDTOS= users.stream().map(UserDTO::new).toList();
 
         return ResponseEntity.status(HttpStatus.OK).body(userDTOS);

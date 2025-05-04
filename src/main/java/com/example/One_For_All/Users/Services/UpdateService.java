@@ -1,6 +1,6 @@
 package com.example.One_For_All.Users.Services;
 
-import com.example.One_For_All.Users.Entities.User;
+import com.example.One_For_All.Users.model.Entities.Users;
 import com.example.One_For_All.Users.Repos.UserRepository;
 import com.example.One_For_All.Users.model.UpdateUserCommand;
 import com.example.One_For_All.Users.model.UserDTO;
@@ -18,9 +18,9 @@ public class UpdateService {
         this.userRepository = userRepository;
     }
     public ResponseEntity<UserDTO> execute (UpdateUserCommand command){
-        Optional<User> optionalUser = userRepository.findById(command.getId());
+        Optional<Users> optionalUser = userRepository.findById(command.getId());
         if(optionalUser.isPresent()){
-            User user = command.getUser();
+            Users user = command.getUser();
             user.setId(command.getId());
             userRepository.save(user);
             return ResponseEntity.ok(new UserDTO(user));

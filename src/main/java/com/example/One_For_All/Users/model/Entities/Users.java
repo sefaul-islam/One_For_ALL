@@ -1,15 +1,18 @@
-package com.example.One_For_All.Users.Entities;
+package com.example.One_For_All.Users.model.Entities;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "User")
-public class User {
+public class Users {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_id")
@@ -18,16 +21,21 @@ public class User {
     @NotNull(message="Name is required")
     @NotBlank(message = "Name can't be blank")
     @Column(name = "name")
-    private String name;
+    private String username;
 
     @Column(name = "email" ,unique = true, nullable = false)
     @NotNull(message="email is required")
     @NotBlank(message = "email can't be blank")
     private String email;
 
-    @Column(name = "dept_id" , nullable = false)
-    @NotNull(message = "dept id can't be null")
-    private Integer dept_id;
+
+    @Column(name = "password")
+    @NotNull(message="password is required")
+    @NotBlank(message = "password can't be blank")
+    private String password;
+
+    private String role;
+
 
 
 
