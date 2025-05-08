@@ -6,6 +6,8 @@ import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import java.util.List;
+
 
 @Entity
 @Data
@@ -34,6 +36,7 @@ public class Users {
     @NotBlank(message = "password can't be blank")
     private String password;
 
+    @Column(name = "role")
     private String role;
 
 

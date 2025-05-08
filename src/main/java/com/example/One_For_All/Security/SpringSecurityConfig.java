@@ -33,10 +33,17 @@ public class SpringSecurityConfig{
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity, AuthenticationManager authenticationManager) throws Exception{
         return httpSecurity
                 .csrf(AbstractHttpConfigurer::disable)
+                .formLogin(form -> form
+                        .loginPage("/login") // points to login.html
+                        .permitAll()
+                )
                 .authorizeHttpRequests(authorize->{
                     authorize.requestMatchers(HttpMethod.GET, "/getuserinfo").permitAll();
+                    authorize.requestMatchers("/login","/css/**").permitAll();
+                    authorize.requestMatchers(HttpMethod.POST, "/createuser").hasRole("ADMIN");
                     authorize.anyRequest().authenticated();
-                }).addFilterBefore(
+                })
+                .addFilterBefore(
                         new BasicAuthenticationFilter(authenticationManager)
                         , UsernamePasswordAuthenticationFilter.class )
                 .build();

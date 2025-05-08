@@ -38,7 +38,7 @@ public class UserController {
        }
 
 
-       @PostMapping("/postuserinfo")
+       @PostMapping("/createuser")
         public ResponseEntity<UserDTO> postInfoController(@RequestBody Users user){
 
                  return postService.execute(user);
