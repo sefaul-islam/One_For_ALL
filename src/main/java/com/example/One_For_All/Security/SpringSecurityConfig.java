@@ -35,7 +35,8 @@ public class SpringSecurityConfig{
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(authorize->{
                     authorize.requestMatchers(HttpMethod.GET, "/getuserinfo").permitAll();
-                    authorize.requestMatchers(HttpMethod.POST, "/createuser").hasRole("ADMIN");
+                    authorize.requestMatchers(HttpMethod.POST, "/createuser" ,"/admin/**" ).hasRole("ADMIN");
+
                     authorize.anyRequest().authenticated();
                 })
                 .addFilterBefore(

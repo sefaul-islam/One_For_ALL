@@ -1,5 +1,6 @@
 package com.example.One_For_All.Users.model.Entities;
 
+import com.example.One_For_All.Enums.UserRole;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -18,7 +19,7 @@ public class Users {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_id")
-    private Integer id;
+    private long id;
 
     @NotNull(message="Name is required")
     @NotBlank(message = "Name can't be blank")
@@ -37,7 +38,8 @@ public class Users {
     private String password;
 
     @Column(name = "role")
-    private String role;
+    @Enumerated(EnumType.STRING)
+    private UserRole role;
 
 
 

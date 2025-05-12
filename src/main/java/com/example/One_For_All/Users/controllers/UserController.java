@@ -46,19 +46,19 @@ public class UserController {
 
 
         @PutMapping("/updateuserinfo/{id}")
-        public ResponseEntity<UserDTO> updateInfoController(@RequestBody Users user , @PathVariable Integer id){
+        public ResponseEntity<UserDTO> updateInfoController(@RequestBody Users user , @PathVariable Long id){
             return updateService.execute(new UpdateUserCommand(id,user));
         }
 
 
         @DeleteMapping("/deleteuserinfo/{id}")
-        public ResponseEntity<Void> deleteInfoController(@PathVariable Integer id){
+        public ResponseEntity<Void> deleteInfoController(@PathVariable Long id){
            return  deleteService.execute(id);
         }
 
 
         @GetMapping("getinfobyid/{id}")
-        public ResponseEntity<UserDTO> getInfoById(@PathVariable Integer id){
+        public ResponseEntity<UserDTO> getInfoById(@PathVariable Long id){
             return getServiceById.execute(id);
         }
 

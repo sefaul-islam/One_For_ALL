@@ -17,7 +17,7 @@ public class DeleteService {
         this.userRepository = userRepository;
     }
 
-    public ResponseEntity<Void> execute(Integer id){
+    public ResponseEntity<Void> execute(Long id){
         Optional<Users> userOptional= userRepository.findById(id);
         if(userOptional.isPresent()){
             userRepository.deleteById(id);

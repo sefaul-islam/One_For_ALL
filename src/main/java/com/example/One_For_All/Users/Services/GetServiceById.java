@@ -17,7 +17,7 @@ public class GetServiceById {
         this.userRepository = userRepository;
     }
 
-    public ResponseEntity<UserDTO> execute (Integer id){
+    public ResponseEntity<UserDTO> execute (Long id){
         Optional<Users> optionalUser= userRepository.findById(id);
         if(optionalUser.isPresent()){
             return ResponseEntity.ok(new UserDTO(optionalUser.get()));
