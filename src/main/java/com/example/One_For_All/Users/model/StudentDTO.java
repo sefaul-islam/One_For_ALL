@@ -12,14 +12,16 @@ public class StudentDTO {
 
     private String major;
 
-    private UserDTO userDTO;
+    private String name;
+
+    private String email;
 
     public StudentDTO(Students students) {
         this.studentNumber = students.getStudentNumber();
         this.gradeLevel = students.getGradeLevel();
         this.major = students.getMajor();
-        if(students.getUser()!= null) {
-            this.userDTO = new UserDTO(students.getUser());
-        }else throw new UserNotFoundException();
+        this.name = students.getUser().getUsername();
+        this.email= students.getUser().getEmail();
+
     }
 }
