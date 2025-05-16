@@ -27,13 +27,14 @@ public class ReserveCounselParticipantsService {
         this.reserveCounselRepository = reserveCounselRepository;
         this.studentRepository = studentRepository;
     }
+
      public ParticipantDTO registerStudent(Long reserveCounselId, Long studentId) {
         // Get reserve counsel
         ReserveCounsel reserveCounsel = reserveCounselRepository.findById(reserveCounselId)
                 .orElseThrow(() -> new UserNotFoundException());
 
         // Get student
-        Students student = studentRepository.findById(String.valueOf(studentId))
+        Students student = studentRepository.findById(studentId)
                 .orElseThrow(() -> new UserNotFoundException());
 
         // Check if counsel is active and accepting registrations

@@ -28,5 +28,6 @@ public class ParticipantDTO {
         this.studentName = reserveCounselParticipants.getStudent().getUser().getUsername();
         this.studentNumber = reserveCounselParticipants.getStudent().getStudentNumber();
         this.status = reserveCounselParticipants.getStatus().toString();
+        this.joinedAt= reserveCounselParticipants.getJoinedAt();
     }
 }

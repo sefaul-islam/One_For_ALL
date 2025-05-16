@@ -1,7 +1,10 @@
 package com.example.One_For_All.Users.controllers;
 
+import com.example.One_For_All.Users.Services.ReserveCounselParticipantsService;
 import com.example.One_For_All.Users.Services.ReserveCounselService;
 import com.example.One_For_All.Users.model.CreateReserveCounselRequest;
+import com.example.One_For_All.Users.model.Entities.ReserveCounselParticipants;
+import com.example.One_For_All.Users.model.ParticipantDTO;
 import com.example.One_For_All.Users.model.ReserveCounselDTO;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,12 +18,12 @@ import java.util.List;
 public class ReserveCounselController {
 
     private final ReserveCounselService reserveCounselService;
+    private final ReserveCounselParticipantsService reserveCounselParticipantsService;
 
-    public ReserveCounselController(ReserveCounselService reserveCounselService) {
+    public ReserveCounselController(ReserveCounselService reserveCounselService, ReserveCounselParticipantsService reserveCounselParticipantsService) {
         this.reserveCounselService = reserveCounselService;
-
+        this.reserveCounselParticipantsService = reserveCounselParticipantsService;
     }
-
 
     @PostMapping("/faculty/{facultyId}")
     public ResponseEntity<ReserveCounselDTO> createReserveCounsel(
@@ -49,6 +52,18 @@ public class ReserveCounselController {
     @GetMapping("/active")
     public ResponseEntity<List<ReserveCounselDTO>> getActiveReserveCounsels() {
         return ResponseEntity.ok(reserveCounselService.getActiveReserveCounsels());
+    }
+
+
+
+
+    ////////////////participants endpoints///////////
+
+    @PostMapping("/{reserveCounselId}/register/{studentId}")
+    public ResponseEntity<ParticipantDTO> registerStudent(
+            @PathVariable Long reserveCounselId,
+            @PathVariable Long studentId) {
+        return ResponseEntity.ok(reserveCounselParticipantsService.registerStudent(reserveCounselId, studentId));
     }
 
 
