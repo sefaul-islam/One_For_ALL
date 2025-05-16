@@ -17,12 +17,4 @@ public class CreateReserveCounselRequest {
     private LocalDateTime endTime;
     private Integer maxParticipants;
 
-    public CreateReserveCounselRequest(ReserveCounsel reserveCounsel){
-        this.title = reserveCounsel.getTitle();
-        this.description = reserveCounsel.getDescription();
-        this.startTime = reserveCounsel.getStartTime();
-        this.endTime = reserveCounsel.getEndTime();
-        this.maxParticipants = reserveCounsel.getMaxParticipants();
-
-    }
 }

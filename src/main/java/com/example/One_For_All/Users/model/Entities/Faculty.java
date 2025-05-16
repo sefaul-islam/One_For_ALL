@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -14,13 +15,11 @@ import java.util.List;
 @Table(name = "faculty")
 public class Faculty {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "faculty_id")
     private Long facultyId;
 
     @OneToOne
     @MapsId // This indicates that facultyId is both PK and FK to User
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "faculty_id")
     private Users user;
 
     @Column(name = "department", nullable = false, length = 100)
@@ -34,4 +33,19 @@ public class Faculty {
 
     @OneToMany(mappedBy = "faculty", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ReserveCounsel> reserveCounsels;
+
+    public void addReserveCounsel(ReserveCounsel reserveCounsel) {
+        if (reserveCounsels == null) {
+            reserveCounsels = new ArrayList<>();
+        }
+        reserveCounsels.add(reserveCounsel);
+        reserveCounsel.setFaculty(this);
+    }
+
+    public void removeReserveCounsel(ReserveCounsel reserveCounsel) {
+        if (reserveCounsels != null) {
+            reserveCounsels.remove(reserveCounsel);
+            reserveCounsel.setFaculty(null);
+        }
+    }
 }
