@@ -1,11 +1,16 @@
 package com.example.One_For_All.Users.model.Entities;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import java.util.List;
 
 @Entity
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 @Table(name = "faculty")
 public class Faculty {
     @Id
