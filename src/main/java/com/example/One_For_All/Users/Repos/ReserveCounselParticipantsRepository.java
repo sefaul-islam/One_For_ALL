@@ -15,6 +15,7 @@ public interface ReserveCounselParticipantsRepository extends JpaRepository<Rese
     //works like count function of aggregate count function in sql
     List<ReserveCounselParticipants> findByReserveCounsel(ReserveCounsel reserveCounsel);
 
+    //to check whether the student has registered in the certain counsel
     Optional<ReserveCounselParticipants> findByReserveCounselAndStudent(ReserveCounsel reserveCounsel, Students student);
 
 }

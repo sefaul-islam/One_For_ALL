@@ -3,14 +3,12 @@ package com.example.One_For_All.Users.controllers;
 import com.example.One_For_All.Users.Services.ReserveCounselParticipantsService;
 import com.example.One_For_All.Users.Services.ReserveCounselService;
 import com.example.One_For_All.Users.model.CreateReserveCounselRequest;
-import com.example.One_For_All.Users.model.Entities.ReserveCounselParticipants;
 import com.example.One_For_All.Users.model.ParticipantDTO;
 import com.example.One_For_All.Users.model.ReserveCounselDTO;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
