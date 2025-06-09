@@ -22,7 +22,7 @@ public class ReserveCounselController {
         this.reserveCounselService = reserveCounselService;
         this.reserveCounselParticipantsService = reserveCounselParticipantsService;
     }
-
+    // for faculty only later will be authorized
     @PostMapping("/faculty/{facultyId}")
     public ResponseEntity<ReserveCounselDTO> createReserveCounsel(
             @PathVariable Long facultyId,

@@ -7,13 +7,13 @@ import lombok.Data;
 @Data
 public class UserDTO {
     private long id;
-    private String name;
+    private String username;
     private String email;
     private UserRole role;
 
     public UserDTO(Users users) {
         this.id = users.getId();
-        this.name = users.getUsername();
+        this.username = users.getUsername();
         this.email = users.getEmail();
         this.role= users.getRole();
     }
