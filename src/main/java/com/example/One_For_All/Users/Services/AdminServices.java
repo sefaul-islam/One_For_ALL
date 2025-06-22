@@ -43,7 +43,7 @@ public class AdminServices {
         user.setUsername(createFacultyDTO.getUsername());
         user.setEmail(createFacultyDTO.getEmail());
         user.setPassword(bCryptPasswordEncoder.encode(createFacultyDTO.getPassword()));
-        user.setRole(UserRole.FACULTY);
+        user.setRole(createFacultyDTO.getRole());
         Users saveduser  = userRepository.save(user);
 
         Faculty faculty = new Faculty();

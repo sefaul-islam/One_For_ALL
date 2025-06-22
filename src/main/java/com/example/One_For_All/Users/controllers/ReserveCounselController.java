@@ -5,8 +5,10 @@ import com.example.One_For_All.Users.Services.ReserveCounselService;
 import com.example.One_For_All.Users.model.CreateReserveCounselRequest;
 import com.example.One_For_All.Users.model.ParticipantDTO;
 import com.example.One_For_All.Users.model.ReserveCounselDTO;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -24,9 +26,16 @@ public class ReserveCounselController {
     }
     // for faculty only later will be authorized
     @PostMapping("/faculty/{facultyId}")
-    public ResponseEntity<ReserveCounselDTO> createReserveCounsel(
+    public ResponseEntity<?> createReserveCounsel(
             @PathVariable Long facultyId,
-            @RequestBody CreateReserveCounselRequest request) {
+            @Valid @RequestBody CreateReserveCounselRequest request,BindingResult bindingResult) {
+
+
+        if (bindingResult.hasErrors()) {
+            bindingResult.getAllErrors()
+                    .forEach(error -> System.out.println("Validation error: " + error.getDefaultMessage()));
+            return ResponseEntity.badRequest().body(bindingResult.getAllErrors());
+        }
         return ResponseEntity.status(HttpStatus.CREATED).body( reserveCounselService.createReserveCounsel(request, facultyId));
     }
 

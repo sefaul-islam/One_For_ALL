@@ -53,4 +53,7 @@ public class CustomUserDetails implements UserDetails {
     public String getPassword() {
         return users.getPassword();
     }
+    public long getUserId(){
+        return users.getId();
+    }
 }
