@@ -42,8 +42,7 @@ public class Users {
     private UserRole role;
 
 
-    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
-    private Faculty faculty;
+
 
 
 

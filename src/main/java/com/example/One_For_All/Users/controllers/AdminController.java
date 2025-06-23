@@ -1,11 +1,8 @@
 package com.example.One_For_All.Users.controllers;
 
 import com.example.One_For_All.Users.Services.AdminServices;
-import com.example.One_For_All.Users.model.CreateFacultyDTO;
-import com.example.One_For_All.Users.model.CreateStudentDTO;
+import com.example.One_For_All.Users.model.*;
 import com.example.One_For_All.Users.model.Entities.Students;
-import com.example.One_For_All.Users.model.FacultyDTO;
-import com.example.One_For_All.Users.model.StudentDTO;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -31,5 +28,11 @@ public class AdminController {
     public ResponseEntity<StudentDTO> createstudent(@RequestBody CreateStudentDTO createStudentDTO){
         return ResponseEntity.status(HttpStatus.CREATED).body(adminServices.createStudent(createStudentDTO));
     }
+    @PostMapping("/createadmin")
+    public ResponseEntity<AdminDTO> createAdmin(@RequestBody CreateAdminDTO createAdminDTO){
+        return ResponseEntity.status(HttpStatus.CREATED).body(adminServices.createAdmin(createAdminDTO));
+    }
+
+
 
 }
