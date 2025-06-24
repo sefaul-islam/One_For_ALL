@@ -17,4 +17,8 @@ public interface ReserveCounselRepository extends JpaRepository<ReserveCounsel,L
 
     @Query("SELECT rc FROM ReserveCounsel rc WHERE rc.startTime <= :currentTime AND rc.endTime > :currentTime")
     List<ReserveCounsel> findActive(@Param("currentTime") LocalDateTime currentTime);
+    List<ReserveCounsel> findByEndTimeBeforeAndStatusNot(LocalDateTime now, ReserveCounsel.Status status);
+    List<ReserveCounsel> findByStartTimeBeforeAndStatus(LocalDateTime now, ReserveCounsel.Status status);
+
+
 }

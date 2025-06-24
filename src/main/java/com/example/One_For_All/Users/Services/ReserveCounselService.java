@@ -8,6 +8,8 @@ import com.example.One_For_All.Users.model.Entities.ReserveCounsel;
 import com.example.One_For_All.Users.model.ReserveCounselDTO;
 import com.example.One_For_All.exception.InvalidOperationException;
 import com.example.One_For_All.exception.UserNotFoundException;
+import jakarta.transaction.Transactional;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -88,5 +90,32 @@ public class ReserveCounselService {
                 .map(ReserveCounselDTO::new)
                 .toList();
     }
+
+    @Scheduled(fixedRate = 60000) // every 1 minute
+    @Transactional
+    public void updateExpiredCounselStatuses() {
+        LocalDateTime now = LocalDateTime.now();
+        List<ReserveCounsel> expiredCounsels = reserveCounselRepository.findByEndTimeBeforeAndStatusNot(now, ReserveCounsel.Status.COMPLETED);
+
+        for (ReserveCounsel counsel : expiredCounsels) {
+            counsel.setStatus(ReserveCounsel.Status.COMPLETED);
+        }
+
+        reserveCounselRepository.saveAll(expiredCounsels);
+    }
+    @Scheduled(fixedRate = 60000) // every 1 minute
+    @Transactional
+    public void updateActiveCounselStatuses() {
+        LocalDateTime now = LocalDateTime.now();
+        List<ReserveCounsel> toActivate = reserveCounselRepository.findByStartTimeBeforeAndStatus(now, ReserveCounsel.Status.PENDING);
+
+        for (ReserveCounsel counsel : toActivate) {
+            counsel.setStatus(ReserveCounsel.Status.ACTIVE);
+        }
+
+        reserveCounselRepository.saveAll(toActivate);
+    }
+
+
 
 }

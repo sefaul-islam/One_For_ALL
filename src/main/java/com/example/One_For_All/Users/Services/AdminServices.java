@@ -48,7 +48,7 @@ public class AdminServices {
         user.setUsername(createFacultyDTO.getUsername());
         user.setEmail(createFacultyDTO.getEmail());
         user.setPassword(bCryptPasswordEncoder.encode(createFacultyDTO.getPassword()));
-        user.setRole(createFacultyDTO.getRole());
+        user.setRole(UserRole.FACULTY);
         Users saveduser  = userRepository.save(user);
 
         Faculty faculty = new Faculty();
@@ -74,7 +74,7 @@ public class AdminServices {
         user.setUsername(createStudentDTO.getUsername());
         user.setEmail(createStudentDTO.getEmail());
         user.setPassword(bCryptPasswordEncoder.encode(createStudentDTO.getPassword()));
-        user.setRole(createStudentDTO.getRole());
+        user.setRole(UserRole.STUDENT);
         Users saveduser  = userRepository.save(user);
 
         Students students = new Students();
@@ -99,7 +99,7 @@ public class AdminServices {
         user.setUsername(createAdminDTO.getUsername());
         user.setEmail(createAdminDTO.getEmail());
         user.setPassword(bCryptPasswordEncoder.encode(createAdminDTO.getPassword()));
-        user.setRole(createAdminDTO.getRole());
+        user.setRole(UserRole.ADMIN);
         Users saveduser  = userRepository.save(user);
 
         Admin admin = new Admin();

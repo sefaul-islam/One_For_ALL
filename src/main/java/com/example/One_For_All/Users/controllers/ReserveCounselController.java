@@ -3,6 +3,7 @@ package com.example.One_For_All.Users.controllers;
 import com.example.One_For_All.Users.Services.ReserveCounselParticipantsService;
 import com.example.One_For_All.Users.Services.ReserveCounselService;
 import com.example.One_For_All.Users.model.CreateReserveCounselRequest;
+import com.example.One_For_All.Users.model.Entities.ReserveCounsel;
 import com.example.One_For_All.Users.model.ParticipantDTO;
 import com.example.One_For_All.Users.model.ReserveCounselDTO;
 import jakarta.validation.Valid;
@@ -64,14 +65,6 @@ public class ReserveCounselController {
 
 
 
-    ////////////////participants endpoints///////////
-
-    @PostMapping("/{reserveCounselId}/register/{studentId}")
-    public ResponseEntity<ParticipantDTO> registerStudent(
-            @PathVariable Long reserveCounselId,
-            @PathVariable Long studentId) {
-        return ResponseEntity.ok(reserveCounselParticipantsService.registerStudent(reserveCounselId, studentId));
-    }
 
 
 
