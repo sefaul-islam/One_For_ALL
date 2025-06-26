@@ -55,7 +55,6 @@ public class ReserveCounsel {
         PENDING,
         ACTIVE,
         FULL,
-        COMPLETED,
-        CANCELLED
+        COMPLETED
     }
 }

@@ -1,30 +1,42 @@
 package com.example.One_For_All.Users.Services;
 
 import com.example.One_For_All.Users.Repos.FacultyRepository;
+import com.example.One_For_All.Users.Repos.ReserveCounselParticipantsRepository;
 import com.example.One_For_All.Users.Repos.ReserveCounselRepository;
 import com.example.One_For_All.Users.model.CreateReserveCounselRequest;
 import com.example.One_For_All.Users.model.Entities.Faculty;
 import com.example.One_For_All.Users.model.Entities.ReserveCounsel;
+import com.example.One_For_All.Users.model.Entities.ReserveCounselParticipants;
+import com.example.One_For_All.Users.model.Entities.Students;
+import com.example.One_For_All.Users.model.ParticipantDTO;
 import com.example.One_For_All.Users.model.ReserveCounselDTO;
 import com.example.One_For_All.exception.InvalidOperationException;
 import com.example.One_For_All.exception.UserNotFoundException;
 import jakarta.transaction.Transactional;
+import org.springframework.http.ResponseEntity;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class ReserveCounselService {
 
     private final ReserveCounselRepository reserveCounselRepository;
     private final FacultyRepository facultyRepository;
+    private final ReserveCounselParticipantsRepository reserveCounselParticipantsRepository;
 
     public ReserveCounselService(ReserveCounselRepository reserveCounselRepository,
-                                 FacultyRepository facultyRepository) {
+                                 FacultyRepository facultyRepository,
+                                 ReserveCounselParticipantsRepository reserveCounselParticipantsRepository) {
         this.reserveCounselRepository = reserveCounselRepository;
         this.facultyRepository = facultyRepository;
+        this.reserveCounselParticipantsRepository=reserveCounselParticipantsRepository;
     }
 
     public ReserveCounselDTO createReserveCounsel(CreateReserveCounselRequest request, Long facultyid){
@@ -63,7 +75,7 @@ public class ReserveCounselService {
         }
 
         // Check if the counsel has already started
-        if (reserveCounsel.getStartTime().isBefore(LocalDateTime.now())) {
+        if (reserveCounsel.getStartTime().isBefore(LocalDateTime.now())&&reserveCounsel.getStatus()!= ReserveCounsel.Status.COMPLETED) {
             throw new InvalidOperationException("Cannot delete a reserve counsel that has already started");
         }
 
@@ -103,6 +115,17 @@ public class ReserveCounselService {
 
         reserveCounselRepository.saveAll(expiredCounsels);
     }
+
+    public List<ParticipantDTO> getParticipantsByCounselId(Long reserveCounselId) {
+        ReserveCounsel counsel = reserveCounselRepository.findById(reserveCounselId)
+                .orElseThrow(() -> new RuntimeException("ReserveCounsel not found with ID: " + reserveCounselId));
+
+        return counsel.getParticipants().stream()
+                .map(ParticipantDTO::new)
+                .collect(Collectors.toList());
+    }
+
+
     @Scheduled(fixedRate = 60000) // every 1 minute
     @Transactional
     public void updateActiveCounselStatuses() {
@@ -116,6 +139,27 @@ public class ReserveCounselService {
         reserveCounselRepository.saveAll(toActivate);
     }
 
+    public List<ReserveCounselDTO> getRegisteredCounselForStudent(Long studentId) {
+        List<ReserveCounselParticipants> participants = reserveCounselParticipantsRepository.findByStudent_StudentId(studentId);
+
+        return participants.stream()
+                .map(ReserveCounselParticipants::getReserveCounsel)
+                .map(ReserveCounselDTO::new)
+                .collect(Collectors.toList());
+    }
+
+    public List<ReserveCounselDTO> getAllReserveCounsels() {
+        return reserveCounselRepository.findAll()
+            .stream()
+            .map(ReserveCounselDTO::new)
+            .toList();
+    }
+    public Optional<ReserveCounsel> findById(Long id) {
+        return reserveCounselRepository.findById(id);
+    }
+
 
 
 }
+
+

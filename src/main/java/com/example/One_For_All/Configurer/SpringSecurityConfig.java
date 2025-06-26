@@ -50,6 +50,8 @@ public class SpringSecurityConfig{
                     authorize.requestMatchers("/admin/**").hasRole("ADMIN");
                     authorize.requestMatchers("/getuserinfo").hasRole("FACULTY");
                     authorize.requestMatchers("/reserve-counsels/faculty/**").hasRole("FACULTY");
+                    authorize.requestMatchers("/reservecounsel-participant/**").hasRole("STUDENT");
+                    authorize.requestMatchers("/reserve-counsels/student/**").hasRole("STUDENT");
                     authorize.anyRequest().authenticated();
 
                 })

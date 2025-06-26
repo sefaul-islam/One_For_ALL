@@ -7,7 +7,7 @@ import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import java.util.List;
+
 
 
 @Entity
@@ -23,7 +23,7 @@ public class Users {
 
     @NotNull(message="Name is required")
     @NotBlank(message = "Name can't be blank")
-    @Column(name = "name")
+    @Column(name = "name", unique = true)
     private String username;
 
     @Column(name = "email" ,unique = true, nullable = false)

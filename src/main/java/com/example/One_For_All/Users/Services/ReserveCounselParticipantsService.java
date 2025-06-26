@@ -7,11 +7,15 @@ import com.example.One_For_All.Users.model.Entities.ReserveCounsel;
 import com.example.One_For_All.Users.model.Entities.ReserveCounselParticipants;
 import com.example.One_For_All.Users.model.Entities.Students;
 import com.example.One_For_All.Users.model.ParticipantDTO;
+import com.example.One_For_All.Users.model.ReserveCounselDTO;
 import com.example.One_For_All.exception.InvalidOperationException;
 import com.example.One_For_All.exception.UserNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class ReserveCounselParticipantsService {
@@ -79,4 +83,27 @@ public class ReserveCounselParticipantsService {
 
         return new ParticipantDTO(savedParticipant);
     }
+    public void deleteParticipantByStudentAndCounsel(Long studentId,Long counselId) {
+        Students student = studentRepository.findById(studentId)
+                .orElseThrow(() -> new UserNotFoundException());
+        ReserveCounsel reserveCounsel = reserveCounselRepository.findById(counselId)
+                .orElseThrow(() -> new UserNotFoundException());
+
+        ReserveCounselParticipants participant = participantsRepository
+                .findByReserveCounselAndStudent(reserveCounsel, student)
+                .orElseThrow(() -> new RuntimeException("Participant not found"));
+
+        participantsRepository.delete(participant);
+        reserveCounsel.setCurrentParticipants(reserveCounsel.getCurrentParticipants() - 1);
+        reserveCounselRepository.save( reserveCounsel);
+
+
+    }
+
+
+
+
+
+
+
 }

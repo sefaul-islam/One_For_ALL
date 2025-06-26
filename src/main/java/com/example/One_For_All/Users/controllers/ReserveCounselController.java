@@ -40,15 +40,19 @@ public class ReserveCounselController {
         return ResponseEntity.status(HttpStatus.CREATED).body( reserveCounselService.createReserveCounsel(request, facultyId));
     }
 
+    // getting reserve counsel by counsel id
     @GetMapping("/{id}")
     public ResponseEntity<ReserveCounselDTO> getReserveCounselById(@PathVariable Long id) {
         return ResponseEntity.ok(reserveCounselService.getReserveCounselById(id));
     }
 
+    //get list of reserve counsels created by faculty
     @GetMapping("/faculty/{facultyId}")
     public ResponseEntity<List<ReserveCounselDTO>> getReserveCounselsByFaculty(@PathVariable Long facultyId) {
         return ResponseEntity.ok(reserveCounselService.getReserveCounselsByFaculty(facultyId));
     }
+
+    //delete reserve counsel
     @DeleteMapping("/{id}/faculty/{facultyId}")
     public ResponseEntity<Void> deleteReserveCounsel(
             @PathVariable Long id,
@@ -57,10 +61,36 @@ public class ReserveCounselController {
         return ResponseEntity.noContent().build();
     }
 
+    //getting list of active reserve counsels
     @GetMapping("/active")
     public ResponseEntity<List<ReserveCounselDTO>> getActiveReserveCounsels() {
         return ResponseEntity.ok(reserveCounselService.getActiveReserveCounsels());
     }
+
+    // getting participants of a counsel
+    @GetMapping("/{id}/participants")
+    public ResponseEntity<List<ParticipantDTO>> getParticipants(@PathVariable Long id) {
+        List<ParticipantDTO> participants = reserveCounselService.getParticipantsByCounselId(id);
+        return ResponseEntity.ok(participants);
+    }
+
+    // get counsels registered by the student
+    @GetMapping("/registered/student/{studentId}")
+    public ResponseEntity<List<ReserveCounselDTO>> getRegisteredCounselByStudentId(@PathVariable Long studentId) {
+        List<ReserveCounselDTO> counsels = reserveCounselService.getRegisteredCounselForStudent(studentId);
+        return ResponseEntity.ok(counsels);
+    }
+
+    @GetMapping("/all")
+    public ResponseEntity<List<ReserveCounselDTO>> getAllReserveCounsels() {
+        return ResponseEntity.ok(reserveCounselService.getAllReserveCounsels());
+    }
+
+
+
+
+
+
 
 
 
