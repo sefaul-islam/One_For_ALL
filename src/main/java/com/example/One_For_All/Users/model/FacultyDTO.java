@@ -11,13 +11,15 @@ public class FacultyDTO {
     private String contactNumber;
     private Long userId;
     private String username;
+    private String email;
 
     public FacultyDTO(Faculty faculty) {
         this.facultyId = faculty.getFacultyId();
-        this.department = faculty.getDepartment();
+        this.department = faculty.getDepartment().getDeptname();
         this.academicTitle = faculty.getAcademicTitle();
         this.contactNumber = faculty.getContactNumber();
         this.userId = faculty.getUser().getId();
         this.username = faculty.getUser().getUsername();
+        this.email = faculty.getUser().getEmail();
     }
 }

@@ -52,7 +52,7 @@ public class SpringSecurityConfig{
                     authorize.requestMatchers("/reserve-counsels/faculty/**").hasRole("FACULTY");
                     authorize.requestMatchers("/reservecounsel-participant/**").hasRole("STUDENT");
                     authorize.requestMatchers("/reserve-counsels/student/**").hasRole("STUDENT");
-                    authorize.anyRequest().authenticated();
+                    authorize.anyRequest().permitAll();
 
                 })
                 .addFilterBefore(jwtAuthenticationFilter(jwtUtil),UsernamePasswordAuthenticationFilter.class).build();

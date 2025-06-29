@@ -1,5 +1,6 @@
 package com.example.One_For_All.Users.model.Entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -25,6 +26,9 @@ public class Students {
     @Column
     private String gradeLevel;
 
-    @Column
-    private String major;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "department_id", nullable = false)
+
+    private Department department;
 }

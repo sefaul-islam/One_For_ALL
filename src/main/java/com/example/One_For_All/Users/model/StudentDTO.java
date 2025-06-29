@@ -10,18 +10,20 @@ public class StudentDTO {
 
     private String gradeLevel;
 
-    private String major;
+    private String department;
 
     private String name;
 
+    private Long userId;
     private String email;
 
     public StudentDTO(Students students) {
         this.studentNumber = students.getStudentNumber();
         this.gradeLevel = students.getGradeLevel();
-        this.major = students.getMajor();
+        this.department = students.getDepartment().getDeptname();
         this.name = students.getUser().getUsername();
         this.email= students.getUser().getEmail();
+        this.userId= students.getUser().getId();
 
     }
 }

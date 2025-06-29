@@ -15,5 +15,5 @@ public class CreateStudentDTO {
     private UserRole role;
     private String studentNumber;
     private  String gradeLevel;
-    private String major;
+    private String dept;
 }
